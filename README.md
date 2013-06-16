@@ -7,7 +7,7 @@ import metaspotify
 ms = metaspotify.api()
 ```
 
-US Spotify metadata for: spotify:album:3O8Z8r9OcvUJjJCx4be4Xf
+US Spotify metadata for: `spotify:album:3O8Z8r9OcvUJjJCx4be4Xf`
 - album Final Noise, artists [Eisley, Simon Dawes, Timmy Curran]
 
 ```python
@@ -18,7 +18,7 @@ for result in results: # returns generator expression
 		print track.track_number, ':', track.name # '# : Name'
 ```
 
-Spotify metadata for: spotify:artist:4DBi4EYXgiqbkxvWUXUzMi
+Spotify metadata for: `spotify:artist:4DBi4EYXgiqbkxvWUXUzMi`
 - artist Old Crow Medicine Show
 
 ```python
@@ -29,7 +29,7 @@ for result in results: # returns generator expression
 		print result.name, '-', album.name # 'Artist - Album'
 ```
 
-US Spotify metadata for: spotify:track:7AvbfnZNXylSfjDgFG5vyW
+US Spotify metadata for: `spotify:track:7AvbfnZNXylSfjDgFG5vyW`
 - 04. Wooden Heart, album Wooden Heart, artist Listener
 
 ```python
@@ -40,7 +40,7 @@ for result in results: # returns generator expression
 	print result.popularity # 0.46726
 ```
 
-US metadata using SpotifyID for: spotify:track:59KXRDb8kuoRjG5oRTEHgK
+US metadata using SpotifyID for: `spotify:track:59KXRDb8kuoRjG5oRTEHgK`
 - 08. Letter From Omaha, album Josh Ritter, artist Josh Ritter
 
 ```python
