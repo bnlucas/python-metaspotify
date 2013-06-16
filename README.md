@@ -36,7 +36,7 @@ US Spotify metadata for: spotify:track:7AvbfnZNXylSfjDgFG5vyW
 results = ms.track.search('wooden heart', artist='listener',
 	album='wooden heart')
 
-for result in results:
+for result in results: # returns generator expression
 	print result.popularity # 0.46726
 ```
 
@@ -46,7 +46,7 @@ US metadata using SpotifyID for: spotify:track:59KXRDb8kuoRjG5oRTEHgK
 ```python
 results = ms.lookup_id('spotify:track:59KXRDb8kuoRjG5oRTEHgK')
 
-for result in results:
+for result in results: # returns generator expression
 	print result.length # 189.472
 ```
 
