@@ -15,7 +15,7 @@ results = ms.album.search('final noise', artist='timmy curran')
 
 for result in results: # returns generator expression
 	for track in result.tracks:
-		print track.track_number, ':', track.name # '# : Name'
+		print track.track_number, ':', track.name # '# : Track'
 ```
 
 Spotify metadata for: `spotify:artist:4DBi4EYXgiqbkxvWUXUzMi`
@@ -51,4 +51,4 @@ for result in results: # returns generator expression
 ```
 
 
-[meta]: [https://developer.spotify.com/technologies/web-api/]
+[meta]: https://developer.spotify.com/technologies/web-api/
