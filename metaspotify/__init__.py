@@ -5,6 +5,8 @@ from search import Search
 
 from models import *
 
+__all__ = ('api')
+
 class SpotifyIDError(ValueError):
 
 	def __init__(self, id):
@@ -28,8 +30,8 @@ class api:
 
 		return Lookup.by_id(id, search)
 
-	@classmethod
-	def validate_id(cls, id):
+	@staticmethod
+	def validate_id(id):
 		e = re.compile(r'^(?i)(spotify)\:(album|artist|track)\:([a-z0-9]{22})$')
 		r = e.search(id)
 		if r:

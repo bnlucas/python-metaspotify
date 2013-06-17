@@ -8,8 +8,12 @@ __all__ = ('APICall')
 
 cache = {}
 
-class APICallException(Exception):
-	pass
+class APICallError(Exception):
+	
+	def __init__(self, status_code, url, text):
+		message ='{c}: could not load {u}: {r}'.format(c=status_code, u=url,
+			r=text)
+		Exception.__init__(self, message)
 
 class APICall:
 
@@ -27,8 +31,8 @@ class APICall:
 					u=response.url, s=(t2 - t1))
 
 			if response.status_code != 200:
-				raise APICallException('{c}: could not load {u}: {r}'.format(
-					c=response.status_code, u=response.url, r=response.text))
+				raise APICallError(response.status_code, response.url,
+					response.text)
 
 			cache[cache_key] = response
 
