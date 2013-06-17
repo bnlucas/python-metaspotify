@@ -58,10 +58,10 @@ class Search(Service):
 	def is_artist(self, item, artist):
 		if 'artists' in item:
 			if '/' in item['artists'][0]['name']:
-				name = item['artists'][0]['name']
+				names = item['artists'][0]['name'].split('/')
 				href = item['artists'][0]['href']
 
-				artists = [{'name':a, 'href':href} for a in name.split('/')]
+				artists = [{'name':i, 'href':href} for i in names]
 
 				item['artists'] = artists
 
