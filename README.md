@@ -2,6 +2,18 @@ MetaSpotify
 ===========
 Python wrapper for the [Spotify metadata API][meta]
 
+See [MetaSpotify 0.1.0][v010] for current wrapper. This will not be pushed to
+master or v1.0.0 until the caching methods are worked out. Currently, the only
+caching mechanisim is storing instance results in a `dict` that is searched with
+`metaspotify.connection.APICall.get`. Future work will include `null`, `simple`,
+`memcache`, `redis`, and `filesystem` cache systems.
+
+The caching system is from the API limitations of 10 requests per second per IP.
+Spotify pushes use of a `If-Modified-Since` header using the original request's
+`Last-Modified` header.
+
+See [Spotify's Caching][cache] requests for more information.
+
 ```python
 import metaspotify
 ms = metaspotify.api()
@@ -86,3 +98,5 @@ Output:
 ```
 
 [meta]: https://developer.spotify.com/technologies/web-api/
+[v010]: https://github.com/bnlucas/python-metaspotify/tree/0.1.0
+[cache]: https://developer.spotify.com/technologies/web-api/#caching
