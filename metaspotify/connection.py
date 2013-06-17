@@ -2,7 +2,7 @@ import requests
 
 from time import time
 
-import config
+from config import TIMEOUT, TRACE_API_CALLS
 
 __all__ = ('APICall')
 
@@ -23,10 +23,10 @@ class APICall:
 		cache_key = '?'.join([url, '&'.join(qs)])
 		if cache_key not in cache:
 			t1 = time()
-			response = requests.get(url, params=kwargs, timeout=config.TIMEOUT)
+			response = requests.get(url, params=kwargs, timeout=TIMEOUT)
 			t2 = time()
 
-			if response and config.TRACE_API_CALLS:
+			if response and TRACE_API_CALLS:
 				print '{c}: {u} took {s:.4f}s.'.format(c=response.status_code,
 					u=response.url, s=(t2 - t1))
 
