@@ -22,7 +22,7 @@ class api:
 	@classmethod
 	def lookup_id(cls, id):
 		try:
-			model, sid = cls.validate_id(id)
+			model = cls.validate_id(id)
 		except SpotifyIDError:
 			raise
 
