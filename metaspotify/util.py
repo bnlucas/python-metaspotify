@@ -17,7 +17,7 @@ def set_id(function):
 	@functools.wraps(function)
 	def func(*args, **kwargs):
 		if 'href' in kwargs:
-			kwargs['id']: kwargs['href'].split(':')[2]
+			kwargs['id'] = kwargs['href'].split(':')[2]
 		return function(*args, **kwargs)
 	return func
 
