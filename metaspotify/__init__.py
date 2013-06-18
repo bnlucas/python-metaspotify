@@ -22,7 +22,7 @@ class api:
 	@classmethod
 	def lookup_id(cls, id):
 		try:
-			_, model, sid = cls.validate_id(id)
+			model, sid = cls.validate_id(id)
 		except SpotifyIDError:
 			raise
 
@@ -32,8 +32,8 @@ class api:
 
 	@staticmethod
 	def validate_id(id):
-		e = re.compile(r'^(?i)(spotify)\:(album|artist|track)\:([a-z0-9]{22})$')
+		e = re.compile(r'^(?i)spotify:(album|artist|track):[a-z0-9]{22}$')
 		r = e.search(id)
 		if r:
-			return r.groups()
+			return r.groups()[0]
 		raise SpotifyIDError(id)
