@@ -2,7 +2,7 @@ MetaSpotify
 ===========
 Python wrapper for the [Spotify metadata API][meta]
 
-See [MetaSpotify 0.2.0][v020] for current wrapper. This will not be pushed to
+See [MetaSpotify 0.2.0][v] for current wrapper. This will not be pushed to
 master or v1.0.0 until the caching methods are worked out. Currently, the only
 caching mechanisim is storing instance results in a `dict` that is searched with
 `metaspotify.connection.APICall.get`. Future work will include `null`, `simple`,
@@ -98,5 +98,5 @@ Output:
 ```
 
 [meta]: https://developer.spotify.com/technologies/web-api/
-[v020]: https://github.com/bnlucas/python-metaspotify/tree/0.1.0
+[v]: https://github.com/bnlucas/python-metaspotify/tree/0.2.0
 [cache]: https://developer.spotify.com/technologies/web-api/#caching
