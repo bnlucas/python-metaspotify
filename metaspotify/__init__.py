@@ -7,33 +7,35 @@ from models import *
 
 __all__ = ('api')
 
+
 class SpotifyIDError(ValueError):
 
-	def __init__(self, id):
-		message = '{id} is not a valid Spotify ID.'.format(id=id)
-		ValueError.__init__(self, message)
+    def __init__(self, id):
+        message = '{id} is not a valid Spotify ID.'.format(id=id)
+        ValueError.__init__(self, message)
+
 
 class api:
 
-	album  = Search(Album)
-	artist = Search(Artist)
-	track  = Search(Track)
+    album = Search(Album)
+    artist = Search(Artist)
+    track = Search(Track)
 
-	@classmethod
-	def lookup_id(cls, id):
-		try:
-			model = cls.validate_id(id)
-		except SpotifyIDError:
-			raise
+    @classmethod
+    def lookup_id(cls, id):
+        try:
+            model = cls.validate_id(id)
+        except SpotifyIDError:
+            raise
 
-		search = cls.__dict__[model]
+        search = cls.__dict__[model]
 
-		return Lookup.by_id(id, search)
+        return Lookup.by_id(id, search)
 
-	@staticmethod
-	def validate_id(id):
-		e = re.compile(r'^(?i)spotify:(album|artist|track):[a-z0-9]{22}$')
-		r = e.search(id)
-		if r:
-			return r.groups()[0]
-		raise SpotifyIDError(id)
+    @staticmethod
+    def validate_id(id):
+        e = re.compile(r'^(?i)spotify:(album|artist|track):[a-z0-9]{22}$')
+        r = e.search(id)
+        if r:
+            return r.groups()[0]
+        raise SpotifyIDError(id)
