@@ -17,10 +17,13 @@ class SpotifyIDError(ValueError):
 
 class api:
 
-    def __init__(self, cache_timeout=None):
-        self.album = Search(Album, cache_timeout)
-        self.artist = Search(Artist, cache_timeout)
-        self.track = Search(Track, cache_timeout)
+    def __init__(self, cache_function=None, cache_arguments={}):
+        self.album = Search(Album, cache_function, cache_arguments)
+        self.artist = Search(Artist, cache_function, cache_arguments)
+        self.track = Search(Track, cache_function, cache_arguments)
+
+        self.cache_function = cache_function
+        self.cache_arguments = cache_arguments
 
     @classmethod
     def lookup_id(cls, id):
@@ -31,7 +34,8 @@ class api:
 
         search = cls.__dict__[model]
 
-        return Lookup.by_id(id, search)
+        return Lookup.by_id(
+            id, search, self.cache_function, self.cache_arguments)
 
     @staticmethod
     def validate_id(id):

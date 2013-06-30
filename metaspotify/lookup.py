@@ -10,9 +10,9 @@ class Lookup(Service):
     url = ''.join([API_HOST, API_LOOKUP.format(version=API_VERSION)])
 
     @classmethod
-    def by_id(cls, id, searcher):
+    def by_id(cls, id, searcher, cache_function, cache_arguments):
 
-        @searcher.cache.cache(timeout=searcher.cache_timeout)
+        @cache_function(cache_arguments)
         def api_call(url, id):
             response = APICall.get(url, uri=id)
             return Lookup._unwrap(response, searcher.model.res_name)
