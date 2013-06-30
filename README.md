@@ -4,23 +4,11 @@ Python wrapper for the [Spotify metadata API][sm]
 
 The Spotify metadata API limitations are 10 requests per second per IP. Spotify
 pushes use of a `If-Modified-Since` header using the original request's
-`Last-Modified` header. See [Spotify's Caching][cache] requests for more
+`Last-Modified` header. See [Spotify's Caching][sc] requests for more
 information. As this would require a backend to store this information, and with
 most applications already having a caching system implemented, MetaSpotify takes
 the caching function as an argument within `metaspotify.api()` to cache these
 results, not store them.
-
-See [MetaSpotify 0.9.0][v] for current wrapper. This will not be pushed to
-master or v1.0.0 until the caching methods are worked out. Currently, the only
-caching mechanisim is storing instance results in a `dict` that is searched with
-`metaspotify.connection.APICall.get`. Future work will include `null`, `simple`,
-`memcache`, `redis`, and `filesystem` cache systems.
-
-The caching system is from the API limitations of 10 requests per second per IP.
-Spotify pushes use of a `If-Modified-Since` header using the original request's
-`Last-Modified` header.
-
-See [Spotify's Caching][cache] requests for more information.
 
 ```python
 import metaspotify
@@ -40,11 +28,7 @@ What the example using [Flask-Cache][fc] does is tell MetaSpotify to use the
 `cache.memoize` decorator with `kwargs` `timeout=60`. MetaSpotify calls a given
 decorator, as most caching libraries use decorators for this.
 
-The caching functions are called within [metaspotify.search][ms] and [metaspotify.lookup][ml].
-
-
-* * *
-
+The caching functions are called within 
 
 US Spotify metadata for: `spotify:album:3O8Z8r9OcvUJjJCx4be4Xf`
 - album `Final Noise`, artists `[Eisley, Simon Dawes, Timmy Curran]`
@@ -124,19 +108,8 @@ Output:
 189.472
 ```
 
-<<<<<<< HEAD
-[meta]: https://developer.spotify.com/technologies/web-api/
-<<<<<<< HEAD
-[v010]: https://github.com/bnlucas/python-metaspotify/tree/0.1.0
-[cache]: https://developer.spotify.com/technologies/web-api/#caching
-=======
 [sm]: https://developer.spotify.com/technologies/web-api/
 [sc]: https://developer.spotify.com/technologies/web-api/#caching
 [fc]: http://pythonhosted.org/Flask-Cache/
 [ms]: https://github.com/bnlucas/python-metaspotify/blob/master/metaspotify/search.py
 [ml]: https://github.com/bnlucas/python-metaspotify/blob/master/metaspotify/lookup.py
->>>>>>> 0.9.0
-=======
-[v]: https://github.com/bnlucas/python-metaspotify/tree/0.9.0
-[cache]: https://developer.spotify.com/technologies/web-api/#caching
->>>>>>> 6980ad30a239cb623b286f624f95020c3c37e939
