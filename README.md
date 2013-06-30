@@ -28,7 +28,9 @@ What the example using [Flask-Cache][fc] does is tell MetaSpotify to use the
 `cache.memoize` decorator with `kwargs` `timeout=60`. MetaSpotify calls a given
 decorator, as most caching libraries use decorators for this.
 
-The caching functions are called within 
+The caching functions are called within [search][ms] and [lookup][ml]
+
+----------------------
 
 US Spotify metadata for: `spotify:album:3O8Z8r9OcvUJjJCx4be4Xf`
 - album `Final Noise`, artists `[Eisley, Simon Dawes, Timmy Curran]`
