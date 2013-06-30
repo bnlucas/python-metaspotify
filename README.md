@@ -15,9 +15,17 @@ import metaspotify
 
 ms = metaspotify.api() # Without any parameters, the MetaSpotify SimpleCache is
                        # loaded.
-
-
+```
+```python
 # This is an example of using Flask-Cache with MetaSpotify inside a Flask app.
+from flask import Flask
+from flask_cache import Cache
+
+app = Flask('application')
+cache = Cache(app)
+
+# ...
+
 ms = metaspotify.api(
     cache_function=cache.memoize, cache_arguments={'timeout': 60})
 
