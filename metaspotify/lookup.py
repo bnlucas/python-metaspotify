@@ -12,7 +12,7 @@ class Lookup(Service):
     @classmethod
     def by_id(cls, id, searcher, cache_function, cache_arguments):
 
-        @cache_function(cache_arguments)
+        @cache_function(**cache_arguments)
         def api_call(url, id):
             response = APICall.get(url, uri=id)
             return Lookup._unwrap(response, searcher.model.res_name)
