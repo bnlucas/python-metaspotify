@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import re
 
 from lookup import Lookup
@@ -46,4 +44,3 @@ class api:
         if r:
             return r.groups()[0]
         raise SpotifyIDError(id)
->>>>>>> 0.9.0
