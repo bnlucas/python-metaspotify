@@ -11,18 +11,21 @@ __all__ = ('Search')
 
 class Search(Service):
 
-    def __init__(self, model, cache_timeout):
+    def __init__(self, model, cache_function, cache_arguments):
         self.model = model
 
-        self.cache = SimpleCache()
-        self.cache_timeout = cache_timeout
+        self.cache_function = cache_function
+        if self.cache_function is None:
+            cache = SimpleCache()
+            self.cache_function = cache.cache
+        self.cache_arguments = cache_arguments
 
         self.url = ''.join([API_HOST, API_SEARCH.format(
             version=API_VERSION, model=model.res_name)])
 
     def search(self, query, page=1, **options):
 
-        @self.cache.cache(timeout=self.cache_timeout)
+        @self.cache_function(**self.cache_arguments)
         def api_call(url, query):
             response = APICall.get(url, q=query)
             return Search._unwrap(response, self.model.wrapper)
