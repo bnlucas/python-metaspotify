@@ -1,5 +1,6 @@
 from math import ceil
 
+from cache import SimpleCache
 from config import API_HOST, API_SEARCH, API_VERSION
 from connection import APICall
 from base import Service
@@ -10,12 +11,22 @@ __all__ = ('Search')
 
 class Search(Service):
 
-    def __init__(self, model):
+    def __init__(self, model, cache_timeout):
         self.model = model
+
+        self.cache = SimpleCache()
+        self.cache_timeout = cache_timeout
+
         self.url = ''.join([API_HOST, API_SEARCH.format(
             version=API_VERSION, model=model.res_name)])
 
     def search(self, query, page=1, **options):
+
+        @self.cache.cache(timeout=self.cache_timeout)
+        def api_call(url, query):
+            response = APICall.get(url, q=query)
+            return Search._unwrap(response, self.model.wrapper)
+
         if query != '':
             query = ':'.join([self.model.res_name, query])
 
@@ -27,8 +38,7 @@ class Search(Service):
             artist = ''.join(['artist:', options['artist']])
             query = ' '.join([artist, query])
 
-        response = APICall.get(self.url, q=query.rstrip())
-        info, result = Search._unwrap(response, self.model.wrapper)
+        info, result = api_call(self.url, query=query.rstrip())
 
         if options and ('pages' in options):
             return self.pages(info['num_results'], info['limit'])

@@ -17,9 +17,10 @@ class SpotifyIDError(ValueError):
 
 class api:
 
-    album = Search(Album)
-    artist = Search(Artist)
-    track = Search(Track)
+    def __init__(self, cache_timeout=None):
+        self.album = Search(Album, cache_timeout)
+        self.artist = Search(Artist, cache_timeout)
+        self.track = Search(Track, cache_timeout)
 
     @classmethod
     def lookup_id(cls, id):

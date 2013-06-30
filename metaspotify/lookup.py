@@ -11,8 +11,13 @@ class Lookup(Service):
 
     @classmethod
     def by_id(cls, id, searcher):
-        response = APICall.get(cls.url, uri=id)
-        info, result = Lookup._unwrap(response, searcher.model.res_name)
+
+        @searcher.cache.cache(timeout=searcher.cache_timeout)
+        def api_call(url, id):
+            response = APICall.get(url, uri=id)
+            return Lookup._unwrap(response, searcher.model.res_name)
+
+        info, result = api_call(cls.url, id=id)
 
         q = {'query': result['name']}
 
